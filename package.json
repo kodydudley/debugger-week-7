@@ -1,0 +1,11 @@
+
+  {
+    "name": "debugger-week-7",
+    "version": "1.0.0",
+    "scripts": {
+      "setup": "npm run setup:client && npm run setup:server",
+      "setup:client": "cd debugger-week-7.client && npm i",
+      "setup:server": "cd debugger-week-7.server && npm i"
+    }
+  }
+  
