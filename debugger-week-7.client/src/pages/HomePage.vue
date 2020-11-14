@@ -1,5 +1,6 @@
 <template>
   <div class="home ">
+    <input type="text" placeholder="New Bug Title" v-model="state.newBug.title">
     <table class="table">
       <thead>
         <tr>
