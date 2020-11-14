@@ -3,15 +3,15 @@ import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class BugsService {
-  // async createBugs(data) {
-  //   try {
-  //     const res = await api.post('/boards', data)
-  //     this.getBugs()
-  //     logger.log(res.data)
-  //   } catch (error) {
-  //     logger.error(error)
-  //   }
-  // }
+  async createBugs(data) {
+    try {
+      const res = await api.post('/bugs', data)
+      this.getBugs()
+      logger.log(res.data)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 
   async getBugs() {
     try {

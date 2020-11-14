@@ -1,11 +1,9 @@
 <template>
-  <div class="BugsComponent">
-    <td>
-      Hello
-    </td>
-    <!-- <h1>
+  <div class="BugsComponent my-3">
+    <!-- <h1>hello bugs</h1> -->
+    <h1>
       {{ bugs.title }}
-    </h1> -->
+    </h1>
   </div>
 </template>
 

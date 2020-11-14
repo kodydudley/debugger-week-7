@@ -1,40 +1,23 @@
 <template>
-  <div class="home ">
-    <input type="text" placeholder="New Bug Title" v-model="state.newBug.title">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">
-            Title
-          </th>
-          <th scope="col">
-            Reported By
-          </th>
-          <th scope="col">
-            Status
-          </th>
-          <th scope="col">
-            Date
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">
-            1
-          </th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <bugs-component v-for="bug in bugs" :bugs-props="bug" :key="bug" />
-          </th>
-        </tr>
-      </tbody>
-    </table>
-    <div class="row">
+  <div class="home container-fluid">
+    <div class="row my-3 justify-content-around">
+      <div class="col-6">
+        <h4>Submit A New Bug</h4>
+        <form @submit.prevent="createBugs">
+          <input class="form-control my-2" type="text" placeholder="New Bug Title" v-model="state.newBug.title">
+          <input class="form-control my-2" type="text" placeholder="Bug Description" v-model="state.newBug.description">
+          <input class="form-control my-2" type="text" placeholder="Reported By" v-model="state.newBug.reportedBy">
+          <button type="submit" class="btn btn-primary">
+            Submit bug
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="row justify-content-around">
+      <h1>Bugs</h1>
+    </div>
+    <div class="row justify-content-center">
+      <bugs-component v-for="bug in bugs" :bugs-prop="bug" :key="bug" />
     </div>
   </div>
 </template>
@@ -52,12 +35,20 @@ export default {
     onMounted(() => { bugsService.getBugs() })
     const state = reactive({
       newBug: {},
-      title: ''
+      title: '',
+      description: '',
+      reportedBy: ''
     })
     return {
       state,
       profile: computed(() => AppState.profile),
-      bugs: computed(() => AppState.bugs)
+      bugs: computed(() => AppState.bugs),
+      createBugs() {
+        bugsService.createBugs(state.newBug)
+        state.newBug.title = ''
+        state.newBug.description = ''
+        state.newBug.reportedBy = ''
+      }
     }
   }
 }
