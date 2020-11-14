@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import { RegisterControllers, Paths } from '../Setup'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { logger } from './utils/Logger'
+const domain = process.env.AUTH_DOMAIN
 
 export default class Startup {
   static ConfigureGlobalMiddleware(app) {
@@ -17,9 +18,30 @@ export default class Startup {
       },
       credentials: true
     }
-    app.use(helmet())
+    app.use('',
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", `https://${domain}/*`, '*'],
+            styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'", '*'],
+            imgSrc: ["'self'", '*.githubusercontent.com', '*.blob.core.windows.net', '*'],
+            connectSrc: ["'self'", `https://${domain}/oauth/token`, `https://${domain}/userinfo`, '*'],
+            fontSrc: ["'self'", 'https://fonts.gstatic.com', '*'],
+            objectSrc: ["'self'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'self'", `https://${domain}`]
+          },
+          reportOnly: false
+        }
+      })
+    )
     app.use(cors(corsOptions))
     app.use(bp.json({ limit: '50mb' }))
+    // app.use('', (req, res, next) => {
+    //   res.setHeader('Content-Security-Policy', 'script-src', 'self', 'https://organyze.herokuapp.com')
+    //   return next()
+    // })
 
     // NOTE Configures auth0 middleware that is used throughout controllers
     Auth0Provider.configure({

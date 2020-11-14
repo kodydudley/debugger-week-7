@@ -6,7 +6,6 @@ import NoteSchema from '../models/Note'
 
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
-
   Bugs = mongoose.model('Bug', BugSchema);
 
   Notes = mongoose.model('Note', NoteSchema);
