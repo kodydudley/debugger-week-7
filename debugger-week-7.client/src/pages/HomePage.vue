@@ -1,15 +1,64 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo">
-    <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
-      <span class="mx-2 text-white">Vue 3 Starter</span>
-    </h1>
+  <div class="home ">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            Title
+          </th>
+          <th scope="col">
+            Reported By
+          </th>
+          <th scope="col">
+            Status
+          </th>
+          <th scope="col">
+            Date
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">
+            1
+          </th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <bugs-component v-for="bug in bugs" :bugs-props="bug" :key="bug" />
+          </th>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+    </div>
   </div>
 </template>
 
 <script>
+import { computed, onMounted, reactive } from 'vue'
+import BugsComponent from '../components/BugsComponent.vue'
+import { bugsService } from '../services/BugsService'
+import { AppState } from '../AppState'
+
 export default {
-  name: 'Home'
+  components: { BugsComponent },
+  name: 'Home',
+  setup() {
+    onMounted(() => { bugsService.getBugs() })
+    const state = reactive({
+      newBug: {},
+      title: ''
+    })
+    return {
+      state,
+      profile: computed(() => AppState.profile),
+      bugs: computed(() => AppState.bugs)
+    }
+  }
 }
 </script>
 
