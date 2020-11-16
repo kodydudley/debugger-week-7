@@ -2,6 +2,10 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 import Bugs from '../models/Bug'
 class BugsService {
+  async editBug(bugId, body) {
+    return await dbContext.Bugs.findOneAndUpdate({ _id: bugId, closed: false }, body)
+  }
+
   async getBugs(query = {}) {
     return await dbContext.Bugs.find(query).populate('creatorId')
   }

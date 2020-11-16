@@ -5,9 +5,7 @@ import { api } from './AxiosService'
 class BugsService {
   async createBugs(data) {
     try {
-      const res = await api.post('/bugs', data)
-      this.getBugs()
-      logger.log(res.data)
+      return await api.post('/bugs', data)
     } catch (error) {
       logger.error(error)
     }
@@ -22,10 +20,11 @@ class BugsService {
     }
   }
 
-  async deBug(bugId) {
+  async deleteBug(bugId) {
     try {
-      await api.delete('/bugs/' + bugId)
-      this.getBugs()
+      const res = await api.put('/bugs/' + bugId, { closed: true })
+      AppState.activeBug = res.data
+      logger.log('close')
     } catch (error) {
       logger.error(error)
     }
@@ -38,6 +37,17 @@ class BugsService {
       AppState.activeBug = res.data
     } catch (error) {
       logger.error(error)
+    }
+  }
+
+  async editBug(bugId, body) {
+    try {
+      const res = await api.put('bugs/' + bugId, body)
+      console.log(bugId, body)
+      AppState.activeBug = res.data
+      this.getActiveBug(bugId)
+    } catch (error) {
+      console.error(error)
     }
   }
 }

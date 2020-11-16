@@ -1,6 +1,6 @@
 <template>
   <div class="BugsComponent my-3 col-4">
-    <div class="card text-left pl-2">
+    <div class="card text-left pl-2 bg-danger" v-if="bugs.closed == false">
       <router-link :to="{name: 'ActiveBug', params: {bugId: bugs._id}}">
         <h3 class="text-dark">
           <b>Title:</b>
@@ -18,6 +18,30 @@
           <b>Last Updated:</b>
           {{ bugs.updatedAt }}
         </h6>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div class="card text-left pl-2 bg-success " v-if="bugs.closed == true">
+      <router-link :to="{name: 'ActiveBug', params: {bugId: bugs._id}}">
+        <h3 class="text-dark">
+          <b>Title:</b>
+          {{ bugs.title }}
+        </h3>
+      </router-link>
+      <div>
+        <h6>
+          <b>Description:</b>
+          {{ bugs.description }}
+        </h6>
+      </div>
+      <div>
+        <h6>
+          <b>Last Updated:</b>
+          {{ bugs.updatedAt }}
+        </h6>
+      </div>
+      <div>
       </div>
     </div>
   </div>

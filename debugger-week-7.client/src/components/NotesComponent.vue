@@ -12,7 +12,7 @@
           {{ notes.note }}
         </h6>
       </div>
-      <button @click="deleteNote" class="btn btn-danger btn-sm float-left">
+      <button @click="deleteNote" class="btn col-1 btn-danger">
         Delete
       </button>
     </div>

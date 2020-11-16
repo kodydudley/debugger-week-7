@@ -1,5 +1,13 @@
 <template>
   <div class="home container-fluid">
+    <div class="row">
+      <div class="col-6 bg-danger">
+        <h4>Red = Open</h4>
+      </div>
+      <div class="col-6 bg-success">
+        <h4>Green = Closed</h4>
+      </div>
+    </div>
     <div class="row my-3 justify-content-around">
       <div class="col-6">
         <h4>Submit A New Bug</h4>
@@ -26,7 +34,7 @@
     <div class="row justify-content-around">
       <h1>Bugs</h1>
     </div>
-    <div class="col-10 offset-1">
+    <div>
       <div class="row justify-content-around">
         <bugs-component v-for="bug in bugs" :bugs-prop="bug" :key="bug" />
       </div>
@@ -46,10 +54,7 @@ export default {
   setup() {
     onMounted(() => { bugsService.getBugs() })
     const state = reactive({
-      newBug: {},
-      title: '',
-      description: '',
-      reportedBy: ''
+      newBug: { closed: false }
     })
     return {
       state,

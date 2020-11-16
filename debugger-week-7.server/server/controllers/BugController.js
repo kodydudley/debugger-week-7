@@ -9,11 +9,19 @@ export class BugController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/', this.getBugs)
       .get('/:bugId/notes', this.getNotesByBugId)
-
+      .put('/:bugId', this.editBug)
     // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createBugs)
       .delete('/:bugId', this.deleteBug)
       .get('/:bugId', this.getBugById)
+  }
+
+  async editBug(req, res, next) {
+    try {
+      return res.send(await bugsService.editBug(req.params.bugId, req.body))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getBugs(req, res, next) {
