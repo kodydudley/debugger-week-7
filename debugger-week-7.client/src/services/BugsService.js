@@ -22,24 +22,24 @@ class BugsService {
     }
   }
 
-  //   async deleteBug(boardId) {
-  //     try {
-  //       await api.delete('/boards/' + boardId)
-  //       this.getBugs()
-  //     } catch (error) {
-  //       logger.error(error)
-  //     }
-  //   }
+  async deBug(bugId) {
+    try {
+      await api.delete('/bugs/' + bugId)
+      this.getBugs()
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 
-//   async getActiveBug(boardId) {
-//     try {
-//       const res = await api.get('/boards/' + boardId)
-//       logger.log('from the service')
-//       AppState.activeBug = res.data
-//     } catch (error) {
-//       logger.error(error)
-//     }
-//   }
+  async getActiveBug(bugId) {
+    try {
+      const res = await api.get('/bugs/' + bugId)
+      logger.log('from the service')
+      AppState.activeBug = res.data
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 }
 
 export const bugsService = new BugsService()

@@ -10,13 +10,13 @@ class NotesService {
     return await dbContext.Notes.create(body)
   }
 
-  async deleteNote(bugId) {
-    const exists = await dbContext.Notes.findById(bugId)
+  async deleteNote(listId) {
+    const exists = await dbContext.Notes.findById(listId)
     if (!exists) {
-      throw new BadRequest('This board does not exist')
+      throw new BadRequest('This note does not exist')
     } else {
-      await dbContext.Notes.findByIdAndDelete(bugId)
-      return 'The board has been deleted'
+      await dbContext.Notes.findByIdAndDelete(listId)
+      return 'The note has been deleted'
     }
   }
 

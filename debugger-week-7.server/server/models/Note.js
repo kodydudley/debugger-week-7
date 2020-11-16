@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 const Notes = new Schema({
-  content: { type: String, required: true },
+  note: { type: String, required: true },
   bug: { type: ObjectId, required: true, ref: 'Bug' },
   reportedBy: { type: String, required: true }
 },

@@ -1,19 +1,24 @@
 <template>
-  <div class="BugsComponent my-3">
-    <div class="row">
-      <h1>
-        {{ bugs.title }}
-      </h1>
-    </div>
-    <div class="row">
-      <h1>
-        {{ bugs.description }}
-      </h1>
-    </div>
-    <div class="row">
-      <h1>
-        {{ bugs.updatedAt }}
-      </h1>
+  <div class="BugsComponent my-3 col-4">
+    <div class="card text-left pl-2">
+      <router-link :to="{name: 'ActiveBug', params: {bugId: bugs._id}}">
+        <h3 class="text-dark">
+          <b>Title:</b>
+          {{ bugs.title }}
+        </h3>
+      </router-link>
+      <div>
+        <h6>
+          <b>Description:</b>
+          {{ bugs.description }}
+        </h6>
+      </div>
+      <div>
+        <h6>
+          <b>Last Updated:</b>
+          {{ bugs.updatedAt }}
+        </h6>
+      </div>
     </div>
   </div>
 </template>

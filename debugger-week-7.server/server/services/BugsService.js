@@ -10,13 +10,13 @@ class BugsService {
     return await dbContext.Bugs.create(body)
   }
 
-  async deleteBug(boardId, userId) {
-    const exists = await dbContext.Bugs.findById(boardId)
+  async deleteBug(bugId, userId) {
+    const exists = await dbContext.Bugs.findById(bugId)
     if (!exists) {
-      throw new BadRequest('This board does not exist')
+      throw new BadRequest('This THINGGG does not exist')
     } else if (exists._doc.creatorId == userId) {
-      await dbContext.Bugs.findByIdAndDelete(boardId)
-      return 'The board has been deleted'
+      await dbContext.Bugs.findByIdAndDelete(bugId)
+      return 'The bug has been deleted'
     }
   }
 

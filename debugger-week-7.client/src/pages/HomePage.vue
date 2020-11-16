@@ -5,19 +5,31 @@
         <h4>Submit A New Bug</h4>
         <form @submit.prevent="createBugs">
           <input class="form-control my-2" type="text" placeholder="New Bug Title" v-model="state.newBug.title">
-          <input class="form-control my-2" type="text" placeholder="Bug Description" v-model="state.newBug.description">
+          <textarea placeholder="Bug Description"
+                    name=""
+                    id=""
+                    cols="83"
+                    rows="5"
+                    v-model="state.newBug.description"
+          ></textarea>
           <input class="form-control my-2" type="text" placeholder="Reported By" v-model="state.newBug.reportedBy">
-          <button type="submit" class="btn btn-primary">
-            Submit bug
-          </button>
+          <!-- <label for="checkbox">Is this bug still open? </label>
+          <input type="checkbox" id="checkbox" v-model="checked"> -->
+          <div>
+            <button type="submit" class="btn btn-primary">
+              Submit bug
+            </button>
+          </div>
         </form>
       </div>
     </div>
     <div class="row justify-content-around">
       <h1>Bugs</h1>
     </div>
-    <div class="row justify-content-center">
-      <bugs-component v-for="bug in bugs" :bugs-prop="bug" :key="bug" />
+    <div class="col-10 offset-1">
+      <div class="row justify-content-around">
+        <bugs-component v-for="bug in bugs" :bugs-prop="bug" :key="bug" />
+      </div>
     </div>
   </div>
 </template>
